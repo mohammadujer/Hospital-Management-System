@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   const [activePage, setActivePage] = useState("dashboard");
 
@@ -49,7 +51,7 @@ function App() {
 
   const fetchPatients = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/patients");
+      const response = await fetch(`${API_BASE_URL}/api/patients`);
       const data = await response.json();
       setPatients(data);
     } catch (error) {
@@ -74,7 +76,7 @@ function App() {
 
     try {
       if (editingPatientId) {
-        await fetch(`http://localhost:8080/api/patients/${editingPatientId}`, {
+        await fetch(`${API_BASE_URL}/api/patients/${editingPatientId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +86,7 @@ function App() {
 
         setEditingPatientId(null);
       } else {
-        await fetch("http://localhost:8080/api/patients", {
+        await fetch(`${API_BASE_URL}/api/patients`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -137,7 +139,7 @@ function App() {
 
   const deletePatient = async (id) => {
     try {
-      await fetch(`http://localhost:8080/api/patients/${id}`, {
+      await fetch(`${API_BASE_URL}/api/patients/${id}`, {
         method: "DELETE",
       });
 
@@ -151,7 +153,7 @@ function App() {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/doctors");
+      const response = await fetch(`${API_BASE_URL}/api/doctors`);
       const data = await response.json();
       setDoctors(data);
     } catch (error) {
@@ -176,7 +178,7 @@ function App() {
 
     try {
       if (editingDoctorId) {
-        await fetch(`http://localhost:8080/api/doctors/${editingDoctorId}`, {
+        await fetch(`${API_BASE_URL}/api/doctors/${editingDoctorId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -186,7 +188,7 @@ function App() {
 
         setEditingDoctorId(null);
       } else {
-        await fetch("http://localhost:8080/api/doctors", {
+        await fetch(`${API_BASE_URL}/api/doctors`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -239,7 +241,7 @@ function App() {
 
   const deleteDoctor = async (id) => {
     try {
-      await fetch(`http://localhost:8080/api/doctors/${id}`, {
+      await fetch(`${API_BASE_URL}/api/doctors/${id}`, {
         method: "DELETE",
       });
 
@@ -253,7 +255,7 @@ function App() {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/appointments");
+      const response = await fetch(`${API_BASE_URL}/api/appointments`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {
@@ -273,20 +275,17 @@ function App() {
 
     try {
       if (editingAppointmentId) {
-        await fetch(
-          `http://localhost:8080/api/appointments/${editingAppointmentId}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(appointmentForm),
-          }
-        );
+        await fetch(`${API_BASE_URL}/api/appointments/${editingAppointmentId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(appointmentForm),
+        });
 
         setEditingAppointmentId(null);
       } else {
-        await fetch("http://localhost:8080/api/appointments", {
+        await fetch(`${API_BASE_URL}/api/appointments`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -339,7 +338,7 @@ function App() {
 
   const deleteAppointment = async (id) => {
     try {
-      await fetch(`http://localhost:8080/api/appointments/${id}`, {
+      await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
         method: "DELETE",
       });
 
